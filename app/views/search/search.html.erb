@@ -1,0 +1,19 @@
+<h2>Search Results for: <i><%= params[:term] %></i></h2>
+ 
+<% if @articles %>
+<ul class="search_results">
+  <% @articles.with_details.each do |article, details| %>
+    <li>
+      <h3>
+        <%= link_to article.title, controller: "articles", action: "show", id: article.id %>
+      </h3>
+      <p><%= details[:highlight][:text].html_safe %>...</p>
+    </li>
+  <% end %>
+</ul>
+<% else %>
+  <p>Your search did not match any documents.</p>
+<% end %>
+
+
+<%= link_to 'Back', articles_path %>
